@@ -94,7 +94,7 @@ async function reindexEs(pool) {
   // Pristine index: delete first so no stale docs survive.
   try { await es.deleteIndex(config.esIndex); } catch { /* 404 = didn't exist, fine */ }
   // PUT the whole file: ES expects {"mappings": {...}} at the top level
-  await es.createIndex(config.esIndex, await readFile(new URL("../../es-mapping.json", import.meta.url), "utf8"));
+  await es.createIndex(config.esIndex, await readFile(new URL("../es-mapping.json", import.meta.url), "utf8"));
 
   if (docs.length === 0) return 0;
   const nd = docs
